@@ -5,12 +5,7 @@ class ChartComponent extends Component {
     super(props);
 
     this.state = {
-      chartData: [],
-      series: [
-        {
-          data: [],
-        },
-      ],
+      fetchedData: [],
       options: {
         chart: {
           type: 'candlestick',
@@ -38,27 +33,26 @@ class ChartComponent extends Component {
       .then((res) => res.json())
       .then((res) => {
         this.setState({
-          chartData: res,
+          fetchedData: res,
         });
       });
   }
   render() {
     var newSeries = [
       {
-        data: this.state.chartData.map((d) => {
+        data: this.state.fetchedData.map((value) => {
           return {
-            x: new Date(d.timestamp).getTime(),
+            x: new Date(value.timestamp).getTime(),
             y: [
-              parseFloat(d.open),
-              parseFloat(d.max),
-              parseFloat(d.min),
-              parseFloat(d.close),
+              parseFloat(value.open),
+              parseFloat(value.max),
+              parseFloat(value.min),
+              parseFloat(value.close),
             ],
           };
         }),
       },
     ];
-    console.log(newSeries[0]);
     return (
       <div className='mixed-chart'>
         <Chart

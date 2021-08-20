@@ -1,5 +1,5 @@
 import './App.css';
-import ChartComponent from './ChartComponent';
+import ChartComponent from './components/ChartComponent';
 
 function App() {
   return (
